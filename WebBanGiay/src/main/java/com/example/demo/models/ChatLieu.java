@@ -30,9 +30,11 @@ public class ChatLieu {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "loai_chat_lieu")
     private String loaiChatLieu;
 
@@ -48,6 +50,7 @@ public class ChatLieu {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 }
