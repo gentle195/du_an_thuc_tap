@@ -31,12 +31,15 @@ public class HangSanPham {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ten")
     private String ten;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "xuat_su")
     private String xuatSu;
 
@@ -50,6 +53,7 @@ public class HangSanPham {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 }

@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,18 +34,22 @@ public class ChiTietSanPham {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_nhap")
     private BigDecimal giaNhap;
 
+    @NotNull(message = "Không để trống thông tin")
     @Column(name = "gia_ban")
     private BigDecimal giaBan;
 
+    @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuongTon;
 
     @Column(name = "url_anh")
     private String urlAnh;
 
+    @NotNull(message = "Không để trống thông tin")
     @Column(name = "nam_bao_hang")
     private int namBaoHanh;
 
@@ -53,6 +59,7 @@ public class ChiTietSanPham {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 

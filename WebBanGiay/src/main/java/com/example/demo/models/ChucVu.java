@@ -31,9 +31,11 @@ public class ChucVu {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ten")
     private String ten;
 
@@ -47,6 +49,7 @@ public class ChucVu {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 }

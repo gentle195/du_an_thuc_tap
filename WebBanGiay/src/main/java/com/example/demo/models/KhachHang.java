@@ -36,19 +36,24 @@ public class KhachHang {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ho_ten")
     private String hoTen;
-
 
     @Column(name = "gioi_tinh")
     private Boolean gioiTinh;
 
+    @NotBlank(message = "Không để trống thông tin")
+    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
     @Column(name = "email")
     private String email;
 
+    @NotBlank(message = "Không để trống thông tin")
+    @Pattern(regexp = "^0[0-9]{9}$", message = "Sdt phải 10 số và bắt đầu bằng 0")
     @Column(name = "sdt")
     private String sdt;
 
@@ -61,13 +66,11 @@ public class KhachHang {
     @Column(name = "mat_khau")
     private String matKhau;
 
-    @CreationTimestamp
     @Column(name = "ngay_tao")
     private Date ngayTao;
 
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
-
 
     @Column(name = "tinh_trang")
     private int tinhTrang;

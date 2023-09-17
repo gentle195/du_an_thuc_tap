@@ -33,18 +33,23 @@ public class DiaChi {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "dia_chi")
     private String diaChi;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "quan")
     private String quan;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "huyen")
     private String huyen;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "thanh_pho")
     private String thanhPho;
 
@@ -58,6 +63,7 @@ public class DiaChi {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 
