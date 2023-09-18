@@ -13,69 +13,62 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<h4 style="text-align: center">Thông tin khách hàng</h4>
-<br>
+<h4 style="text-align: center">Thông tin địa chỉ</h4>
+
 <div class="container">
     <table class="table container">
         <tbody>
         <tr>
-            <form action="/khach-hang/search" method="post">
+            <form action="/dia-chi/search" method="post">
                 <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
                     <button type="submit">Tìm kiếm</button>
                 </td>
             </form>
             <td colspan="2" style="text-align: center">
                 <button class="btn btn-info">
-                    <a style="color: white;text-decoration: none" href="/khach-hang/view-add">Thêm mới</a>
+                    <a style="color: white;text-decoration: none" href="/dia-chi/view-add">Thêm mới</a>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-</div>
 <div class="container">
     <table class="table container">
         <tr>
             <th>STT</th>
             <th>Mã</th>
-            <th>Họ tên</th>
-            <th>Giới tính</th>
-            <th>Email</th>
-            <th>SDT</th>
-            <th>Ngày sinh</th>
-            <th>Tài khoản</th>
-            <th>Mật khẩu</th>
+            <th>Địa chỉ</th>
+            <th>Quận</th>
+            <th>Huyện</th>
+            <th>Thành phố</th>
+            <th>Khách hàng</th>
             <th>Ngày tạo</th>
             <th>Ngày cập nhật</th>
             <th>Tình trạng</th>
-            <th colspan="2">Chức năng</th>
+            <th>Mô tả</th>
+            <th>Chức năng</th>
         </tr>
-        <c:forEach items="${listKhachHang}" var="khachHang" varStatus="stt">
+        <c:forEach items="${listDiaChi}" var="diaChi" varStatus="stt">
             <tr>
                 <td>${stt.index+1}</td>
-                <td>${khachHang.ma}</td>
-                <td>${khachHang.hoTen} </td>
+                <td>${diaChi.ma}</td>
+                <td>${diaChi.diaChi}</td>
+                <td>${diaChi.quan}</td>
+                <td>${diaChi.huyen}</td>
+                <td>${diaChi.thanhPho}</td>
+                <td>${diaChi.khachHang.hoTen}</td>
+                <td>${diaChi.ngayTao}</td>
+                <td>${diaChi.ngayCapNhat}</td>
                 <td>
-                    <c:if test="${khachHang.gioiTinh==true}">Nam</c:if>
-                    <c:if test="${khachHang.gioiTinh==false}">Nữ</c:if>
+                    <c:if test="${diaChi.tinhTrang==0}">Địa chỉ mới</c:if>
+                    <c:if test="${diaChi.tinhTrang==1}">Địa chỉ cũ</c:if>
                 </td>
-                <td>${khachHang.email}</td>
-                <td>${khachHang.sdt}</td>
-                <td>${khachHang.ngaySinh}</td>
-                <td>${khachHang.taiKhoan}</td>
-                <td>${khachHang.matKhau}</td>
-                <td>${khachHang.ngayTao}</td>
-                <td>${khachHang.ngayCapNhat}</td>
+                <td>${diaChi.moTa}</td>
                 <td>
-                    <c:if test="${khachHang.tinhTrang==0}">Khách hàng mới</c:if>
-                    <c:if test="${khachHang.tinhTrang==1}">Khách hàng cũ</c:if>
-                </td>
-
-                <td colspan="2">
-                    <a href="/khach-hang/delete/${khachHang.id}" class="btn btn-success"
+                    <a href="/dia-chi/delete/${diaChi.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/khach-hang/view-update/${khachHang.id}" class="btn btn-success"
+                    <a href="/dia-chi/view-update/${diaChi.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>
@@ -83,16 +76,16 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/khach-hang/hien-thi?num=0">First</a></li>
+            <li class="page-item"><a class="page-link" href="/dia-chi/hien-thi?num=0">First</a></li>
 
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/khach-hang/hien-thi?num=${status.index -1}"
+                    <a href="${pageContext.request.contextPath}/dia-chi/hien-thi?num=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
 
-            <li class="page-item"><a class="page-link" href="/khach-hang/hien-thi?num=${total-1}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="/dia-chi/hien-thi?num=${total-1}">Last</a></li>
         </ul>
     </nav>
 </div>

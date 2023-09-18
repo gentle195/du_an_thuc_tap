@@ -29,6 +29,11 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
+    public List<KhachHang> search(String search) {
+        return khachHangRepository.search(search);
+    }
+
+    @Override
     public KhachHang findById(UUID id) {
         return khachHangRepository.findById(id).orElse(null);
     }
