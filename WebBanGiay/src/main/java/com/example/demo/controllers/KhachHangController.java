@@ -44,7 +44,7 @@ public class KhachHangController {
     }
 
     @GetMapping("/view-add")
-    public String viewAdd(Model model,@ModelAttribute("KhachHang") KhachHang khachHang) {
+    public String viewAdd(Model model, @ModelAttribute("khachHang") KhachHang khachHang) {
         model.addAttribute("khachHang", new KhachHang());
         return "khach-hang/add";
     }
@@ -57,12 +57,12 @@ public class KhachHangController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute(name = "KhachHang") KhachHang khachHang, BindingResult bindingResult, Model model) {
+    public String add(@Valid @ModelAttribute(name = "khachHang") KhachHang khachHang, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "khach-hang/add";
         }
 
-        String maKH = "KH" + khachHangService.findAll().size() + 1;
+        String maKH = "KH" + (khachHangService.findAll().size() + 1);
         khachHang.setMa(maKH);
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
         khachHangService.add(khachHang);
@@ -71,10 +71,26 @@ public class KhachHangController {
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "khachHang") KhachHang khachHang,
-                         @PathVariable(name = "id") UUID id){
+                         @PathVariable(name = "id") UUID id) {
+        KhachHang kh = khachHangService.findById(id);
         khachHang.setId(id);
+        khachHang.setMa(kh.getMa());
         khachHang.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         khachHangService.update(id, khachHang);
-        return "redirect:/nhan-vien/hien-thi";
+        return "redirect:/khach-hang/hien-thi";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(name = "id") UUID id) {
+        khachHangService.delete(id);
+        return "redirect:/khach-hang/hien-thi";
+    }
+
+    @PostMapping("/search")
+    public String search(Model model, @ModelAttribute("khachHang") KhachHang khachHang, @RequestParam("search") String search) {
+        List<KhachHang> list=khachHangService.search(search);
+        model.addAttribute("listKhachHang",list);
+        return "khach-hang/hien-thi";
+    }
+
 }

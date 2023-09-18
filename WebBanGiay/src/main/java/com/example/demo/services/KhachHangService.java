@@ -12,6 +12,8 @@ public interface KhachHangService {
 
     public List<KhachHang> findAll();
 
+    public List<KhachHang> search(String search);
+
     public KhachHang findById(UUID id);
 
     public KhachHang add(KhachHang khachHang);

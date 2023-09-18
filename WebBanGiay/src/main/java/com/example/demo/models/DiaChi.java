@@ -33,7 +33,6 @@ public class DiaChi {
     @Column(name = "id")
     private UUID id;
 
-    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "ma")
     private String ma;
 
