@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -69,7 +70,14 @@ public class ChatLieuController {
         chatLieu.setId(id);
         chatLieu.setMa(clUd.getMa());
         chatLieu.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        chatLieuService.update(id, chatLieu);
+        chatLieuService.update(id,chatLieu);
         return "redirect:/chat-lieu/hien-thi";
     }
+    @PostMapping("/search")
+    public String search (Model model, @ModelAttribute("chatLieu") ChatLieu chatLieu, @RequestParam("search") String search){
+        List<ChatLieu> list = chatLieuService.search(search);
+        model.addAttribute("listChatLieu",list);
+        return "chat-lieu/hien-thi";
+    }
+
 }

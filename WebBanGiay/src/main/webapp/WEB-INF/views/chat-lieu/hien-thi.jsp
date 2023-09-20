@@ -19,7 +19,7 @@
     <table class="table container">
         <tbody>
         <tr>
-            <form action="/hang-san-pham/search" method="post">
+            <form action="/chat-lieu/search" method="post">
                 <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
                     <button type="submit">Tìm kiếm</button>
                 </td>
@@ -37,6 +37,7 @@
     <table class="table container">
         <tr>
             <th>STT</th>
+            <th>Mã</th>
             <th>Loại chất liệu </th>
             <th>Ngày tạo</th>
             <th>Ngày Ngày cập nhập</th>
@@ -47,6 +48,7 @@
         <c:forEach items="${listChatLieu}" var="chatLieu" varStatus="stt">
             <tr>
                 <td>${stt.index+1}</td>
+                <td>${chatLieu.ma}</td>
                 <td>${chatLieu.loaiChatLieu}</td>
                 <td>${chatLieu.ngayTao}</td>
                 <td>${chatLieu.ngayCapNhat}</td>

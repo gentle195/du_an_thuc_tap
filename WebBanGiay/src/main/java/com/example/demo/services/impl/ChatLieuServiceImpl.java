@@ -28,7 +28,7 @@ public class ChatLieuServiceImpl implements ChatLieuService {
 
     @Override
     public List<ChatLieu> search(String search) {
-        return null;
+        return chatLieuRepository.search(search);
     }
 
     @Override

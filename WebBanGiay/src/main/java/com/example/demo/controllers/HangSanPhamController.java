@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,5 +73,11 @@ public class HangSanPhamController {
         hangSanPham.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hangSanPhamService.update(id, hangSanPham);
         return "redirect:/hang-san-pham/hien-thi";
+    }
+    @PostMapping("/search")
+    public String search(Model model, @ModelAttribute("HangSanPham") HangSanPham hangSanPham,@RequestParam("search") String search){
+        List<HangSanPham> list = hangSanPhamService.search(search);
+        model.addAttribute("listHangSanPham",list);
+        return "hang-san-pham/hien-thi";
     }
 }

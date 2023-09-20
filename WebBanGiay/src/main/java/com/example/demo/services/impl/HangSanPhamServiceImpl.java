@@ -31,7 +31,7 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
 
     @Override
     public List<HangSanPham> search(String search) {
-        return null;
+        return hangSanPhamRepository.search(search);
     }
 
     @Override
