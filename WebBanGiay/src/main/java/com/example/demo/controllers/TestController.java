@@ -18,14 +18,4 @@ import java.util.Optional;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<ChatLieu> list = no;
-        model.addAttribute("listChatLieu", list.getContent());
-        model.addAttribute("total", list.getTotalPages());
-        return "chat-lieu/hien-thi";
-    }
 }
