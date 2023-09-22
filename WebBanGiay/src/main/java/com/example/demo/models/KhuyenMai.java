@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class KhuyenMai {
     @Column(name = "ma")
     private String ma;
 
-    @NotBlank(message = "Không để trống thông tin")
+    @NotBlank(message = "Không để trống tên chương trình")
     @Size(min = 6, message = "Tên phải lớn hơn hoặc bằng 6 kí tự")
     @Column(name = "ten")
     private String ten;
@@ -56,12 +57,15 @@ public class KhuyenMai {
     @Column(name = "tinh_trang")
     private int tinhTrang;
 
+    @NotBlank(message = "Không để trống loại")
     @Column(name = "loai_giam_gia")
     private String loaiGiamGia;
 
+    @NotBlank(message = "Không để trống hình thức")
     @Column(name = "hinh_thuc_giam_gia")
     private String hinhThucGiamGia;
 
+    @NotNull(message = "Không để trống mức giảm")
     @Column(name = "so_tien_giam")
     private BigDecimal soTienGiam;
 
