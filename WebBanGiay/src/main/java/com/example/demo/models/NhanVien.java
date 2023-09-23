@@ -42,7 +42,6 @@ public class NhanVien {
     @Column(name = "ho_ten")
     private String hoTen;
 
-
     @Column(name = "url_anh")
     private String urlAnh;
 
