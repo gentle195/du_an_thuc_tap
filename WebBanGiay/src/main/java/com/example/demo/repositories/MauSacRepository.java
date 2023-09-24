@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface MauSacRepository extends JpaRepository<MauSac, UUID> {
-    @Query("select ms from MauSac ms where ms.ma like %:search% or ms.loaiMauSac like %:search%")
+    @Query("select ms from MauSac ms where ms.ma like %:search% or ms.ten like %:search%")
     List<MauSac> search(String search);
 
 }
