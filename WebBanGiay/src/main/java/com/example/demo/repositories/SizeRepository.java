@@ -11,6 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface SizeRepository extends JpaRepository<Size, UUID> {
-    @Query("select si from Size si where si.ma like %:search% or si.loaiSize like %:search%")
+    @Query("select si from Size si where si.ma like %:search% or si.size like %:search%")
     List<Size> search(String search);
 }
