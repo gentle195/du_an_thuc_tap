@@ -70,6 +70,7 @@ public class DeController {
         De deUd = deService.findById(id);
         de.setId(id);
         de.setMa(deUd.getMa());
+        de.setNgayTao(deUd.getNgayTao());
         de.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         deService.update(id,de);
         return "redirect:/de/hien-thi";
