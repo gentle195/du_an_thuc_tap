@@ -82,6 +82,7 @@ public class NhanVienController {
         NhanVien nv = nhanVienService.findById(id);
         nhanVien.setId(id);
         nhanVien.setMa(nv.getMa());
+        nhanVien.setNgayTao(nv.getNgayTao());
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         nhanVienService.update(id,nhanVien);
         return "redirect:/nhan-vien/hien-thi";

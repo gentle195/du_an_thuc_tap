@@ -67,7 +67,7 @@ public class NhanVien {
     private Date ngaySinh;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "can_cuoc_con_dan")
+    @Column(name = "cccd")
     private String canCuoc;
 
     @NotBlank(message = "Không để trống thông tin")

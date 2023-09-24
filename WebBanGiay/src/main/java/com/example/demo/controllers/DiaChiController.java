@@ -85,6 +85,7 @@ public class DiaChiController {
         DiaChi dc = diaChiService.findById(id);
         diaChi.setId(id);
         diaChi.setMa(dc.getMa());
+        diaChi.setNgayTao(dc.getNgayTao());
         diaChi.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         diaChiService.update(id, diaChi);
         return "redirect:/dia-chi/hien-thi";

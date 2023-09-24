@@ -75,6 +75,7 @@ public class KhachHangController {
         KhachHang kh = khachHangService.findById(id);
         khachHang.setId(id);
         khachHang.setMa(kh.getMa());
+        khachHang.setNgayTao(kh.getNgayTao());
         khachHang.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         khachHangService.update(id, khachHang);
         return "redirect:/khach-hang/hien-thi";

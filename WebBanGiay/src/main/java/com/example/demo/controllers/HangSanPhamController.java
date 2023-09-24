@@ -70,6 +70,7 @@ public class HangSanPhamController {
         HangSanPham hangSanPhamupdate = hangSanPhamService.findById(id);
         hangSanPham.setId(id);
         hangSanPham.setMa(hangSanPhamupdate.getMa());
+        hangSanPham.setNgayTao(hangSanPhamupdate.getNgayTao());
         hangSanPham.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         hangSanPhamService.update(id, hangSanPham);
         return "redirect:/hang-san-pham/hien-thi";

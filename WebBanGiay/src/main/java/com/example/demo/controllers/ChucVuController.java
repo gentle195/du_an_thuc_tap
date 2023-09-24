@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.ChatLieu;
 import com.example.demo.models.ChucVu;
 import com.example.demo.services.ChucVuService;
 import jakarta.validation.Valid;
@@ -70,6 +71,9 @@ public class ChucVuController {
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "chucVu") ChucVu chucVu,
                          @PathVariable(name = "id") UUID id){
+        ChucVu cVu = chucVuService.findById(id);
+        chucVu.setMa(cVu.getMa());
+        chucVu.setNgayTao(cVu.getNgayTao());
         chucVu.setId(id);
         chucVu.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         chucVuService.update(id,chucVu);
