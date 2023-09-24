@@ -69,6 +69,7 @@ public class SizeController {
         Size sizeUd = sizeService.findById(id);
         size.setId(id);
         size.setMa(sizeUd.getMa());
+        size.setNgayTao(sizeUd.getNgayTao());
         size.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         sizeService.update(id,size);
         return "redirect:/size/hien-thi";

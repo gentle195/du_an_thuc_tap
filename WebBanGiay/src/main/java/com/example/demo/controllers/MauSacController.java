@@ -69,6 +69,7 @@ public class MauSacController {
         MauSac msUd = mauSacService.findById(id);
         mauSac.setId(id);
         mauSac.setMa(msUd.getMa());
+        mauSac.setNgayTao(msUd.getNgayTao());
         mauSac.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         mauSacService.update(id,mauSac);
         return "redirect:/mau-sac/hien-thi";
