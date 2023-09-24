@@ -69,6 +69,7 @@ public class ChatLieuController {
         ChatLieu clUd = chatLieuService.findById(id);
         chatLieu.setId(id);
         chatLieu.setMa(clUd.getMa());
+        chatLieu.setNgayTao(clUd.getNgayTao());
         chatLieu.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         chatLieuService.update(id,chatLieu);
         return "redirect:/chat-lieu/hien-thi";

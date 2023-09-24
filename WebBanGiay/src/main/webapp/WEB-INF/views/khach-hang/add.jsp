@@ -15,7 +15,7 @@
 <body>
 <h4 style="text-align: center">Thông tin khách hàng</h4>
 <div class="container">
-    <form:form action="/khach-hang/add" method="post" modelAttribute="KhachHang">
+    <form:form action="/khach-hang/add" method="post" modelAttribute="khachHang">
         <div class="row">
             <div class="col-6">
                 <div class="form-floating mb-3 mt-3">
