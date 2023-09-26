@@ -14,6 +14,8 @@ public interface ChiTietSanPhamService {
 
     public List<ChiTietSanPham> search(String search);
 
+    public List<ChiTietSanPham> loc(String locSP, String locMS, String locSize, String locDe);
+
     public ChiTietSanPham findById(UUID id);
 
     public ChiTietSanPham add(ChiTietSanPham chiTietSanPham);
