@@ -92,7 +92,7 @@ public class DiaChiController {
     }
 
     @PostMapping("/modal-add-khach-hang")
-    public String addKhachHang(@ModelAttribute("khachHang") @Valid KhachHang khachHang, BindingResult bindingResult) {
+    public String addKhachHang(@ModelAttribute(name = "DiaChi") DiaChi diaChi, @ModelAttribute("khachHang") @Valid KhachHang khachHang, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "dia-chi/add";
         }

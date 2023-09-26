@@ -11,6 +11,7 @@
     <title>Thêm Chi Tiết Sản Phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
 <h4 style="text-align: center">Thông tin chi tiết sản phẩm</h4>
@@ -25,31 +26,46 @@
                         <form:options items="${listSP}" itemValue="id" itemLabel="ten"/>
                     </form:select>
                     <form:label class="form-label" path="sanPham">Tên sản phẩm:</form:label>
-                    <form:errors path="sanPham" cssStyle="color: red"/>
                 </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:select class="form-select" path="mauSac">
-                        <option>Màu sắc</option>
-                        <form:options items="${listMS}" itemValue="id" itemLabel="ten"/>
-                    </form:select>
-                    <form:label class="form-label" path="mauSac">Màu sắc:</form:label>
-                    <form:errors path="mauSac" cssStyle="color: red"/>
+                <div class="row mb-3 mt-3">
+                    <div class="col-11 form-floating">
+                        <form:select path="mauSac" class="form-select" id="selectMauSac">
+                            <option selected disabled>Màu sắc</option>
+                            <form:options items="${listMS}" itemLabel="ten" itemValue="id"/>
+                        </form:select>
+                    </div>
+                    <div class="col-1">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModalMauSac">
+                            <img src="../img/plus.png">
+                        </a>
+                    </div>
                 </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:select class="form-select" path="size">
-                        <option>Kích cỡ</option>
-                        <form:options items="${listSize}" itemValue="id" itemLabel="size"/>
-                    </form:select>
-                    <form:label class="form-label" path="size">Kích cỡ:</form:label>
-                    <form:errors path="size" cssStyle="color: red"/>
+
+                <div class="row mb-3 mt-3">
+                    <div class="col-11 form-floating">
+                        <form:select path="sizeGiay" class="form-select" id="selectSize">
+                            <option selected disabled>Kích cỡ</option>
+                            <form:options items="${listSize}" itemLabel="size" itemValue="id"/>
+                        </form:select>
+                    </div>
+                    <div class="col-1">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModalSize">
+                            <img src="../img/plus.png">
+                        </a>
+                    </div>
                 </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:select class="form-select" path="de">
-                        <option>Loại đế</option>
-                        <form:options items="${listDe}" itemValue="id" itemLabel="loaiDe"/>
-                    </form:select>
-                    <form:label class="form-label" path="de">Loại đế:</form:label>
-                    <form:errors path="de" cssStyle="color: red"/>
+                <div class="row mb-3 mt-3">
+                    <div class="col-11 form-floating">
+                        <form:select path="de" class="form-select" id="selectDe">
+                            <option selected disabled>Loại đế</option>
+                            <form:options items="${listDe}" itemLabel="loaiDe" itemValue="id"/>
+                        </form:select>
+                    </div>
+                    <div class="col-1">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModalDe">
+                            <img src="../img/plus.png">
+                        </a>
+                    </div>
                 </div>
                 <div class="form-floating mb-3 mt-3">
                     <form:input class="form-control" placeholder="" path="soLuongTon"/>
@@ -100,8 +116,185 @@
         </div>
     </form:form>
 </div>
+<%--Them nhanh mau sac--%>
+<div class="modal fade" id="exampleModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabelMauSac">Màu Sắc</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="imeiListMauSac">
+                    <table class="table">
+                        <%--@elvariable id="mauSac" type=""--%>
+                        <form:form action="/chi-tiet-san-pham/modal-add-mau-sac" method="post" modelAttribute="mauSac">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="ten"/>
+                                        <form:label class="form-label" path="ten">Tên màu sắc:</form:label>
+                                        <form:errors path="ten" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                        <form:errors path="moTa" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check mb-3 mt-3">
+                                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="0" checked="true"/>Hoạt động
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center">
+                                        <button type="submit" class="btn btn-success"
+                                        >Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form:form>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Them nhanh kich co--%>
+<div class="modal fade" id="exampleModalSize" tabindex="-1" aria-labelledby="exampleModalLabelSize"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabelSize">Kích cỡ</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="imeiListSize">
+                    <table class="table">
+                        <%--@elvariable id="size" type=""--%>
+                        <form:form action="/chi-tiet-san-pham/modal-add-size" method="post" modelAttribute="size">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="size"/>
+                                        <form:label class="form-label" path="size">Kích cỡ:</form:label>
+                                        <form:errors path="size" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                        <form:errors path="moTa" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check mb-3 mt-3">
+                                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="0" checked="true"/>Hoạt động
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center">
+                                        <button type="submit" class="btn btn-success"
+                                        >Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form:form>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--Them nhanh de--%>
+<div class="modal fade" id="exampleModalDe" tabindex="-1" aria-labelledby="exampleModalLabelDe"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabelDe">Loại đế</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="imeiListDe">
+                    <table class="table">
+                        <%--@elvariable id="de" type=""--%>
+                        <form:form action="/chi-tiet-san-pham/modal-add-de" method="post" modelAttribute="de">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="loaiDe"/>
+                                        <form:label class="form-label" path="loaiDe">Loại đế:</form:label>
+                                        <form:errors path="loaiDe" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>
+                                        <form:errors path="moTa" cssStyle="color: red"/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check mb-3 mt-3">
+                                        <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="0" checked="true"/>Hoạt động
+                                        <br>
+                                        <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center">
+                                        <button type="submit" class="btn btn-success"
+                                        >Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form:form>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#selectMauSac').select2();
+        $('#selectSize').select2();
+        $('#selectDe').select2();
+    });
+</script>
 </html>

@@ -24,6 +24,36 @@
                     <button type="submit">Tìm kiếm</button>
                 </td>
             </form>
+            <form action="/chi-tiet-san-pham/loc" method="post">
+                <td colspan="2" style="text-align: center">
+                    Lọc:
+                    <select name="locSP">
+                        <option value="null">Sản phẩm</option>
+                        <c:forEach items="${listSP}" var="sp">
+                            <option value="${sp.ten}">${sp.ten}</option>
+                        </c:forEach>
+                    </select>
+                    <select name="locMS">
+                        <option value="null">Màu sắc</option>
+                        <c:forEach items="${listMS}" var="ms">
+                            <option value="${ms.ten}">${ms.ten}</option>
+                        </c:forEach>
+                    </select>
+                    <select name="locSize">
+                        <option value="null">Size</option>
+                        <c:forEach items="${listSize}" var="size">
+                            <option value="${size.size}">${size.size}</option>
+                        </c:forEach>
+                    </select>
+                    <select name="locDe">
+                        <option value="null">Loại đế</option>
+                        <c:forEach items="${listDe}" var="de">
+                            <option value="${de.loaiDe}">${de.loaiDe}</option>
+                        </c:forEach>
+                    </select>
+                    <button type="submit">Lọc</button>
+                </td>
+            </form>
             <td colspan="2" style="text-align: center">
                 <button class="btn btn-info">
                     <a style="color: white;text-decoration: none" href="/chi-tiet-san-pham/view-add">Thêm mới</a>
@@ -58,7 +88,7 @@
                 <td>${ctsp.urlAnh}</td>
                 <td>${ctsp.sanPham.ten}</td>
                 <td>${ctsp.mauSac.ten}</td>
-                <td>${ctsp.size.size}</td>
+                <td>${ctsp.sizeGiay.size}</td>
                 <td>${ctsp.de.loaiDe}</td>
                 <td>${ctsp.soLuongTon}</td>
                 <td>${ctsp.giaNhap}</td>

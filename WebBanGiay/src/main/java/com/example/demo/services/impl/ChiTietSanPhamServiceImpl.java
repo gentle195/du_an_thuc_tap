@@ -33,6 +33,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
+    public List<ChiTietSanPham> loc(String locSP, String locMS, String locSize, String locDe) {
+        return repository.loc(locSP, locMS, locSize, locDe);
+    }
+
+    @Override
     public ChiTietSanPham findById(UUID id) {
         return repository.findById(id).orElse(null);
     }

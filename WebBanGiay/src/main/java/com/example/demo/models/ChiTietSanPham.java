@@ -76,7 +76,7 @@ public class ChiTietSanPham {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_size")
-    private Size size;
+    private Size sizeGiay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_de")
