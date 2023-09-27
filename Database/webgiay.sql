@@ -34,7 +34,7 @@ CREATE TABLE dia_chi
     huyen NVARCHAR(50) Null,
     thanh_pho    NVARCHAR(50) Null,
 	id_khach_hang    UNIQUEIDENTIFIER
-        REFERENCES khach_hang (id),
+        REFERENCES khach_hang (id) default null,
     ngay_tao		DATE Default GetDATE(),
 	ngay_cap_nhat   DATE Null,
 	tinh_trang      INT Null,
@@ -74,7 +74,7 @@ CREATE TABLE nhan_vien
 	ngay_cap_nhat   DATE Null,
     tinh_trang      INT Null,
 	id_chuc_vu	UNIQUEIDENTIFIER
-        REFERENCES chuc_vu (id),
+        REFERENCES chuc_vu (id) default null,
 )
 
 -- HangSanPham
@@ -185,10 +185,10 @@ GO
 -- ChiTietSP
 CREATE TABLE chi_tiet_san_pham
 (
-	Id UNIQUEIDENTIFIER
+	id UNIQUEIDENTIFIER
         DEFAULT NEWID() PRIMARY KEY,
 	id_san_pham	UNIQUEIDENTIFIER
-        REFERENCES san_pham (Id)Not Null,
+        REFERENCES san_pham (id)Not Null,
 	gia_nhap Money Null,
 	gia_ban Money Null,
 	so_luong_ton INT Null,
@@ -227,12 +227,12 @@ GO
 
 CREATE TABLE san_pham_giam_gia
 (
-	Id UNIQUEIDENTIFIER
+	id UNIQUEIDENTIFIER
         DEFAULT NEWID() PRIMARY KEY,
 	id_chi_tiet_san_pham	UNIQUEIDENTIFIER
         REFERENCES chi_tiet_san_pham (id) Not Null,
 	id_khuyen_mai	UNIQUEIDENTIFIER
-        REFERENCES khuyen_mai (id) Not Null,
+        REFERENCES khuyen_mai (id) default Null,
 	tinh_trang  INT Null,
 	mo_ta  NVARCHAR( MAX) Null
 )
@@ -273,14 +273,14 @@ CREATE TABLE hoa_don(
         DEFAULT NEWID() PRIMARY KEY,
 	ma	varchar(50) Not Null,
 	id_nhan_vien  UNIQUEIDENTIFIER
-        REFERENCES nhan_vien (id) Not Null,
+        REFERENCES nhan_vien (id) default Null,
     id_khach_hang  UNIQUEIDENTIFIER
-        REFERENCES khach_hang (id)Not Null,
+        REFERENCES khach_hang (id) default Null,
 	id_dia_chi UNIQUEIDENTIFIER
-        REFERENCES dia_chi (id) Not Null,
+        REFERENCES dia_chi (id) default Null,
 	ten_khach_hang_nhan NVARCHAR(100) Null,
 	sdt varchar(50) Null,
-	tong_tien Money Not Null,
+	tong_tien Money default Null,
 	ngay_tao		DATE Default GetDATE() ,
 	ngay_cap_nhat   DATE Null,
 	ngay_ship		DATE Null,
