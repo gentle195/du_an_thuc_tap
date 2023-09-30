@@ -17,10 +17,14 @@ public class KhachHangServiceImpl implements KhachHangService {
     @Autowired
     KhachHangRepository khachHangRepository;
 
-
     @Override
     public Page<KhachHang> getAll(Pageable pageable) {
-        return khachHangRepository.findAll(pageable);
+        return khachHangRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<KhachHang> getAll1(Pageable pageable) {
+        return khachHangRepository.getAll1(pageable);
     }
 
     @Override
@@ -29,8 +33,8 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public List<KhachHang> search(String search) {
-        return khachHangRepository.search(search);
+    public List<KhachHang> findAll0() {
+        return khachHangRepository.findAll0();
     }
 
     @Override
@@ -39,31 +43,34 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public KhachHang add(KhachHang khachHang) {
-        return khachHangRepository.save(khachHang);
+    public KhachHang add(KhachHang chip) {
+        return khachHangRepository.save(chip);
     }
 
     @Override
-    public KhachHang update(UUID id, KhachHang khachHang) {
+    public KhachHang update(UUID id, KhachHang chip) {
         if (id != null) {
-            KhachHang khachHangUpdate = khachHangRepository.findById(id).orElse(null);
-            if (khachHangUpdate != null) {
-                BeanUtils.copyProperties(khachHang, khachHangUpdate);
-                khachHangRepository.save(khachHangUpdate);
+            KhachHang chipUpdate = khachHangRepository.findById(id).orElse(null);
+            if (chipUpdate != null) {
+                BeanUtils.copyProperties(chip, chipUpdate);
+                khachHangRepository.save(chipUpdate);
             }
         }
         return null;
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if (id != null) {
-            KhachHang khachHang = khachHangRepository.findById(id).orElse(null);
-            if (khachHang != null) {
-                khachHangRepository.delete(khachHang);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        khachHangRepository.updateTT();
+    }
+
+    @Override
+    public List<KhachHang> search0(String ten) {
+        return khachHangRepository.search0(ten);
+    }
+
+    @Override
+    public List<KhachHang> search1(String ten) {
+        return khachHangRepository.search1(ten);
     }
 }

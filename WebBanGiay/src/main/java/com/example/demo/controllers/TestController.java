@@ -18,4 +18,9 @@ import java.util.Optional;
 @RequestMapping("/test")
 public class TestController {
 
+    @GetMapping("/home")
+    public String home(){
+        return "layout";
+    }
+
 }

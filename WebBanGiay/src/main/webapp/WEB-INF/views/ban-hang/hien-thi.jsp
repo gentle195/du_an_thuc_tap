@@ -62,11 +62,11 @@
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossorigin="anonymous"></script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
+<script src="../../../js/off-canvas.js"></script>
+<script src="../../../js/hoverable-collapse.js"></script>
+<script src="../../../js/template.js"></script>
+<script src="../../../js/settings.js"></script>
+<script src="../../../js/todolist.js"></script>
 <script>
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
