@@ -52,7 +52,7 @@ public class NhanVienController {
     public String viewAdd(Model model,@ModelAttribute("nhanVien") NhanVien nhanVien,@ModelAttribute("chucVu") ChucVu chucVu) {
         List<ChucVu> listChucVu = chucVuService.findAll();
         model.addAttribute("nhanVien", new NhanVien());
-        model.addAttribute("listChuVu", listChucVu);
+        model.addAttribute("listChucVu", listChucVu);
         return "nhan-vien/add";
     }
 
