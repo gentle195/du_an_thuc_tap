@@ -74,16 +74,9 @@ public class KhachHangController {
     }
 
     @PostMapping("/add")
-    public String add(Model model,@Valid @ModelAttribute("khachHang") KhachHang khachHang ,BindingResult bindingResult,
-                      @RequestParam("pageNum") Optional<Integer> num,
-                      @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
+    public String add(Model model,@Valid @ModelAttribute("khachHang") KhachHang khachHang ,BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<KhachHang> list = khachHangService.getAll(pageable);
-            model.addAttribute("listKhachHang", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
-            model.addAttribute("contentPage", "khach-hang/hien-thi.jsp");
+            model.addAttribute("contentPage", "khach-hang/add.jsp");
             return "layout";
         }
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));

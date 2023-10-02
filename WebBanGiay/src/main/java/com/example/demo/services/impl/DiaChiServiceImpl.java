@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.DiaChi;
+import com.example.demo.models.DiaChi;
 import com.example.demo.repositories.DiaChiRepository;
 import com.example.demo.services.DiaChiService;
 import org.springframework.beans.BeanUtils;
@@ -15,14 +16,17 @@ import java.util.UUID;
 @Service
 public class DiaChiServiceImpl implements DiaChiService {
 
-
     @Autowired
     DiaChiRepository diaChiRepository;
 
-
     @Override
     public Page<DiaChi> getAll(Pageable pageable) {
-        return diaChiRepository.findAll(pageable);
+        return diaChiRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<DiaChi> getAll1(Pageable pageable) {
+        return diaChiRepository.getAll1(pageable);
     }
 
     @Override
@@ -31,8 +35,8 @@ public class DiaChiServiceImpl implements DiaChiService {
     }
 
     @Override
-    public List<DiaChi> search(String search) {
-        return search(search);
+    public List<DiaChi> findAll0() {
+        return diaChiRepository.findAll0();
     }
 
     @Override
@@ -58,14 +62,17 @@ public class DiaChiServiceImpl implements DiaChiService {
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if (id != null) {
-            DiaChi diaChi = diaChiRepository.findById(id).orElse(null);
-            if (diaChi != null) {
-                diaChiRepository.delete(diaChi);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        diaChiRepository.updateTT();
+    }
+
+    @Override
+    public List<DiaChi> search0(String ten) {
+        return diaChiRepository.search0(ten);
+    }
+
+    @Override
+    public List<DiaChi> search1(String ten) {
+        return diaChiRepository.search1(ten);
     }
 }
