@@ -38,13 +38,13 @@ public class HinhAnh {
     @Column(name = "ten")
     private String ten;
 
-    @Column(name = "url_anh_1")
+    @Column(name = "url_anh1")
     private String anh1;
 
-    @Column(name = "url_anh_2")
+    @Column(name = "url_anh2")
     private String anh2;
 
-    @Column(name = "url_anh_3")
+    @Column(name = "url_anh3")
     private String anh3;
 
     @CreationTimestamp
