@@ -65,7 +65,7 @@ public class DiaChiController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("DiaChi") DiaChi diaChi, @ModelAttribute("khachHang") KhachHang khachHang) {
         model.addAttribute("listKhachHang", khachHangService.findAll0());
-        model.addAttribute("diaChi", new DiaChi());
+        model.addAttribute("DiaChi", new DiaChi());
         model.addAttribute("contentPage", "dia-chi/add.jsp");
         return "layout";
     }
@@ -74,7 +74,7 @@ public class DiaChiController {
     public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("khachHang") KhachHang khachHang, @ModelAttribute("DiaChi") DiaChi diaChi) {
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         DiaChi hsp = diaChiService.findById(id);
-        model.addAttribute("diaChi", hsp);
+        model.addAttribute("DiaChi", hsp);
         model.addAttribute("contentPage", "dia-chi/update.jsp");
         return "layout";
     }
