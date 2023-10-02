@@ -71,7 +71,7 @@ public class DiaChiController {
     }
 
     @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("khachHang") KhachHang khachHang) {
+    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("khachHang") KhachHang khachHang, @ModelAttribute("DiaChi") DiaChi diaChi) {
         model.addAttribute("listKhachHang", khachHangService.findAll0());
         DiaChi hsp = diaChiService.findById(id);
         model.addAttribute("diaChi", hsp);
