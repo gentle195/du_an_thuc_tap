@@ -46,9 +46,10 @@ public class SanPhamController {
 
     @Autowired
     private ChatLieuService chatLieuService;
+
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size",defaultValue = "5",required = false)Integer size){
+                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<SanPham> list = sanPhamService.getAll(pageable);
@@ -59,18 +60,18 @@ public class SanPhamController {
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("sanPham") SanPham sanPham, @ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
-        List<HinhAnh> listHinhAnh = hinhAnhService.findAll();
+//        List<HinhAnh> listHinhAnh = hinhAnhService.findAll();
         List<HangSanPham> listHangSanPham = hangSanPhamService.findAll();
         List<ChatLieu> listChatLieu = chatLieuService.findAll();
         model.addAttribute("sanPham", new SanPham());
-        model.addAttribute("listHinhAnh", listHinhAnh);
+//        model.addAttribute("listHinhAnh", listHinhAnh);
         model.addAttribute("listHangSanPham", listHangSanPham);
         model.addAttribute("listChatLieu", listChatLieu);
         return "san-pham/add";
     }
 
     @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id,@ModelAttribute("chucVu") SanPham sanPham) {
+    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("chucVu") SanPham sanPham) {
         SanPham hsp = sanPhamService.findById(id);
         model.addAttribute("sanPham", hsp);
         return "san-pham/update";
@@ -81,7 +82,7 @@ public class SanPhamController {
         if (bindingResult.hasErrors()) {
             return "san-pham/add";
         }
-        String maNV = "SP" + sanPhamService.findAll().size() + 1;
+        String maNV = "SP" + (sanPhamService.findAll().size() + 1);
         sanPham.setMa(maNV);
         sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
         sanPhamService.add(sanPham);
@@ -91,15 +92,16 @@ public class SanPhamController {
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "sanPham") SanPham sanPham,
                          @ModelAttribute(name = "chucVu") ChucVu chucVu,
-                         @PathVariable(name = "id") UUID id){
+                         @PathVariable(name = "id") UUID id) {
         SanPham nv = sanPhamService.findById(id);
         sanPham.setId(id);
         sanPham.setMa(nv.getMa());
         sanPham.setNgayTao(nv.getNgayTao());
         sanPham.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        sanPhamService.update(id,sanPham);
+        sanPhamService.update(id, sanPham);
         return "redirect:/san-pham/hien-thi";
     }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") UUID id) {
         sanPhamService.delete(id);
@@ -117,6 +119,7 @@ public class SanPhamController {
         hangSanPhamService.add(hangSanPham);
         return "redirect:/san-pham/view-add";
     }
+
     @PostMapping("/modal-add-chat-lieu")
     public String addChatLieu(@ModelAttribute("chatLieu") @Valid ChatLieu chatLieu, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -128,10 +131,11 @@ public class SanPhamController {
         chatLieuService.add(chatLieu);
         return "redirect:/san-pham/view-add";
     }
+
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("sanPham")SanPham sanPham, @RequestParam("search") String search) {
+    public String search(Model model, @ModelAttribute("sanPham") SanPham sanPham, @RequestParam("search") String search) {
         List<SanPham> list = sanPhamService.search(search);
-        model.addAttribute("listSanPham",list);
+        model.addAttribute("listSanPham", list);
         return "san-pham/hien-thi";
     }
 }
