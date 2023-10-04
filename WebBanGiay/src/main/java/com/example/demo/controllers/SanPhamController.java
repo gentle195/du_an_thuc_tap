@@ -60,18 +60,17 @@ public class SanPhamController {
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("sanPham") SanPham sanPham, @ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
-//        List<HinhAnh> listHinhAnh = hinhAnhService.findAll();
+
         List<HangSanPham> listHangSanPham = hangSanPhamService.findAll();
         List<ChatLieu> listChatLieu = chatLieuService.findAll();
         model.addAttribute("sanPham", new SanPham());
-//        model.addAttribute("listHinhAnh", listHinhAnh);
         model.addAttribute("listHangSanPham", listHangSanPham);
         model.addAttribute("listChatLieu", listChatLieu);
         return "san-pham/add";
     }
 
     @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("chucVu") SanPham sanPham) {
+    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("sanPham") SanPham sanPham,@ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
         SanPham hsp = sanPhamService.findById(id);
         model.addAttribute("sanPham", hsp);
         return "san-pham/update";

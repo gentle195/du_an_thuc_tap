@@ -65,9 +65,9 @@
                 <td>${sanPham.hangSanPham.ten}</td>
                 <td>${sanPham.chatLieu.loaiChatLieu}</td>
                 <td colspan="2">
-                    <a href="/san-pham/delete/${nhanVien.id}" class="btn btn-success"
+                    <a href="/san-pham/delete/${sanPham.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/san-pham/view-update/${nhanVien.id}" class="btn btn-success"
+                    <a href="/san-pham/view-update/${sanPham.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>
