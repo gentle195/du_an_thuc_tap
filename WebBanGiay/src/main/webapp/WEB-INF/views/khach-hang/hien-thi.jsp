@@ -63,7 +63,6 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
-                                    <th>STT</th>
                                     <th>Mã</th>
                                     <th>Họ tên</th>
                                     <th>Giới tính</th>
@@ -79,7 +78,6 @@
                                 </tr>
                                 <c:forEach items="${listKhachHang}" var="khachHang" varStatus="stt">
                                     <tr>
-                                        <td>${stt.index+1}</td>
                                         <td>${khachHang.ma}</td>
                                         <td>${khachHang.hoTen} </td>
                                         <td>

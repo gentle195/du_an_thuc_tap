@@ -37,7 +37,7 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
     @Query("select c from KhachHang c  where  c.tinhTrang = 1 and (c.ma like %:ten% or c.hoTen like %:ten%)")
     List<KhachHang> search1(String ten);
 
-    //update lại toàn bộ các trường có trạng thái 0
+    //update lại toàn bộ các trường có trạng thái 0, vì là câu native query nên tên bảng sẽ lấy theo tên trong sql
     @Transactional
     @Modifying
     @Query(value = "update khach_hang set tinh_trang=0", nativeQuery = true)

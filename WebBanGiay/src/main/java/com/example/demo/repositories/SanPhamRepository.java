@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
-    @Query("select sp from SanPham sp where sp.ma like %:search% or sp.tenSP like %:search%")
+    @Query("select sp from SanPham sp where sp.ma like %:search% or sp.ten like %:search%")
     List<SanPham> search(String search);
 }
