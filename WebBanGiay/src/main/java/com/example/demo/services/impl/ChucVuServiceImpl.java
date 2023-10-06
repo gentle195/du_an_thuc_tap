@@ -23,13 +23,18 @@ public class ChucVuServiceImpl implements ChucVuService {
     }
 
     @Override
+    public Page<ChucVu> getAll1(Pageable pageable) {
+        return chucVuRepository.getAll1(pageable);
+    }
+
+    @Override
     public List<ChucVu> findAll() {
         return chucVuRepository.findAll();
     }
 
     @Override
-    public List<ChucVu> search(String search) {
-        return chucVuRepository.search(search);
+    public List<ChucVu> findAll0() {
+        return chucVuRepository.findAll0();
     }
 
     @Override
@@ -55,14 +60,18 @@ public class ChucVuServiceImpl implements ChucVuService {
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if (id != null) {
-            ChucVu chucVu = chucVuRepository.findById(id).orElse(null);
-            if (chucVu != null) {
-                chucVuRepository.delete(chucVu);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        chucVuRepository.updateTT();
     }
+
+    @Override
+    public List<ChucVu> search0(String ten) {
+        return chucVuRepository.search0(ten);
+    }
+
+    @Override
+    public List<ChucVu> search1(String ten) {
+        return chucVuRepository.search1(ten);
+    }
+
 }

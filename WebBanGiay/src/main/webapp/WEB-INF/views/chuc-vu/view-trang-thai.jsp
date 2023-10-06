@@ -21,16 +21,23 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" href="/chuc-vu/hien-thi" role="tab" onclick="return myFunction4()">Thông tin chức vụ </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chuc-vu/view-add" role="tab" onclick="return myFunction6()">Thêm chức vụ  </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin chức vụ</a>
+               aria-controls="description" aria-selected="true">Chức vụ đã xoá</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chuc-vu/hien-thi-delete" role="tab" onclick="return myFunction7()">Chức vụ
-                đã xoá</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chuc-vu/view-add" role="tab" onclick="return myFunction6()">Thêm chức vụ</a>
-        </li>
+        <a href="/chuc-vu/update-all" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
+           tabindex="-1"
+           role="button"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+            <i class="ti-reload btn-icon-prepend"></i>
+            Status All
+        </a>
     </ul>
 </div>
 <div>
@@ -40,9 +47,9 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title" style="float: left">Danh sách chức vụ</h4>
+                        <h4 class="card-title" style="float: left">Danh sách Chức vụ</h4>
                         <%--            Tìm kiếm               --%>
-                        <form action="/chuc-vu/search-0" method="post">
+                        <form action="/chuc-vu/search-1" method="post">
                             <div class="row">
                                 <div class="col-8">
                                     <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
@@ -59,6 +66,7 @@
                                 </div>
                             </div>
                         </form>
+                        <%--           kết thúc tìm kiếm         --%>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
@@ -195,8 +203,6 @@
             return false;
         }
     }
-
-
 </script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
@@ -204,6 +210,8 @@
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
