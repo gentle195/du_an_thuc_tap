@@ -21,15 +21,23 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab" onclick="return myFunction4()">Thông tin chi tiết sản phẩm </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab" onclick="return myFunction6()">Thêm chi tiết sản phẩm </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin chi tiết sản phẩm</a>
+               aria-controls="description" aria-selected="true">Chi tiết sản phẩm đã xoá</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab" onclick="return myFunction7()">Chi tiết sản phẩm đã xóa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab" onclick="return myFunction6()">Thêm chi tiết sản phẩm</a>
-        </li>
+        <a href="/chi-tiet-san-pham/update-all" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
+           tabindex="-1"
+           role="button"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+            <i class="ti-reload btn-icon-prepend"></i>
+            Status All
+        </a>
     </ul>
 </div>
 <div>
@@ -44,12 +52,12 @@
                         <table class="table container">
                             <tbody>
                             <tr>
-                                <form action="/chi-tiet-san-pham/search" method="post">
+                                <form action="/chi-tiet-san-pham/search1" method="post">
                                     <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
                                         <button type="submit">Tìm kiếm</button>
                                     </td>
                                 </form>
-                                <form action="/chi-tiet-san-pham/loc" method="post">
+                                <form action="/chi-tiet-san-pham/loc1" method="post">
                                     <td colspan="2" style="text-align: center">
                                         Lọc:
                                         <select name="locSP">
@@ -79,11 +87,6 @@
                                         <button type="submit">Lọc</button>
                                     </td>
                                 </form>
-                                <td colspan="2" style="text-align: center">
-                                    <button class="btn btn-info">
-                                        <a style="color: white;text-decoration: none" href="/chi-tiet-san-pham/view-add">Thêm mới</a>
-                                    </button>
-                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -244,6 +247,8 @@
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

@@ -4,14 +4,10 @@ import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.De;
 import com.example.demo.models.MauSac;
 import com.example.demo.models.Size;
-import com.example.demo.repositories.DeRepository;
-import com.example.demo.repositories.MauSacRepository;
 import com.example.demo.repositories.SanPhamRepository;
-import com.example.demo.repositories.SizeRepository;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.DeService;
 import com.example.demo.services.MauSacService;
-import com.example.demo.services.SanPhamService;
 import com.example.demo.services.SizeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +61,23 @@ public class ChiTietSanPhamController {
         Page<ChiTietSanPham> list = chiTietSanPhamService.getAll(pageable);
         model.addAttribute("listCTSP", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "chi-tiet-san-pham/hien-thi";
+        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        return "layout";
+    }
+
+    @GetMapping("/hien-thi-delete")
+    public String hienThiDelete(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
+                                @RequestParam("pageNum") Optional<Integer> num,
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
+
+        Sort sort = Sort.by("ngayTao").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        model.addAttribute("listCTSP", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
     }
 
     @GetMapping("/view-add")
@@ -78,7 +90,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listSize", sizeService.findAll());
         model.addAttribute("listDe", deService.findAll());
-        return "chi-tiet-san-pham/add";
+        model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
+        return "layout";
     }
 
     @GetMapping("/view-update/{idctsp}")
@@ -92,7 +105,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listSize", sizeService.findAll());
         model.addAttribute("listDe", deService.findAll());
-        return "chi-tiet-san-pham/update";
+        model.addAttribute("contentPage", "chi-tiet-san-pham/update.jsp");
+        return "layout";
     }
 
     @PostMapping("/add")
@@ -105,7 +119,8 @@ public class ChiTietSanPhamController {
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listSize", sizeService.findAll());
             model.addAttribute("listDe", deService.findAll());
-            return "chi-tiet-san-pham/add";
+            model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
+            return "layout";
         }
 
         chiTietSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -126,10 +141,62 @@ public class ChiTietSanPhamController {
         return "redirect:/chi-tiet-san-pham/hien-thi";
     }
 
-    @GetMapping("/delete/{idctsp}")
-    public String delete(@PathVariable(name = "idctsp") UUID id){
-        chiTietSanPhamService.delete(id);
-        return "redirect:/chi-tiet-san-pham/hien-thi";
+    @GetMapping("/update-all")
+    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
+                           @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        chiTietSanPham.setNgayCapNhat(date);
+        chiTietSanPhamService.updateTT();
+        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        model.addAttribute("listCTSP", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @GetMapping("/update-status/{id}")
+    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+
+        ChiTietSanPham ctsp = chiTietSanPhamService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        ctsp.setNgayCapNhat(date);
+        ctsp.setTinhTrang(1);
+        chiTietSanPhamService.update(id, ctsp);
+        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll(pageable);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        model.addAttribute("listCTSP", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
+    }
+
+    @GetMapping("/reset-status/{id}")
+    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
+        Sort sort = Sort.by("ngayTao").ascending();
+        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
+        ChiTietSanPham ctsp = chiTietSanPhamService.findById(id);
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        ctsp.setNgayCapNhat(date);
+
+        ctsp.setTinhTrang(0);
+        chiTietSanPhamService.update(id, chiTietSanPham);
+        Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        model.addAttribute("listCTSP", page.getContent());
+        model.addAttribute("page", page.getNumber());
+        model.addAttribute("total", page.getTotalPages());
+        return "layout";
     }
 
     @PostMapping("/search")
@@ -139,9 +206,23 @@ public class ChiTietSanPhamController {
         model.addAttribute("listSize", sizeService.findAll());
         model.addAttribute("listDe", deService.findAll());
 
-        List<ChiTietSanPham> list = chiTietSanPhamService.search(search);
+        List<ChiTietSanPham> list = chiTietSanPhamService.search0(search);
         model.addAttribute("listCTSP", list);
-        return "chi-tiet-san-pham/hien-thi";
+        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        return "layout";
+    }
+
+    @PostMapping("/search1")
+    public String search1(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("search") String search){
+        model.addAttribute("listSP", sanPhamRepository.findAll());
+        model.addAttribute("listMS", mauSacService.findAll());
+        model.addAttribute("listSize", sizeService.findAll());
+        model.addAttribute("listDe", deService.findAll());
+
+        List<ChiTietSanPham> list = chiTietSanPhamService.search1(search);
+        model.addAttribute("listCTSP", list);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        return "layout";
     }
 
     @PostMapping("/loc")
@@ -158,8 +239,28 @@ public class ChiTietSanPhamController {
         model.addAttribute("listDe", deService.findAll());
 
         List<ChiTietSanPham> list = chiTietSanPhamService.loc(locSP, locMS, locSize, locDe);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
         model.addAttribute("listCTSP", list);
-        return "chi-tiet-san-pham/hien-thi";
+        return "layout";
+    }
+
+    @PostMapping("/loc1")
+    public String loc1(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("locSP") String locSP,
+                      @RequestParam("locMS") String locMS,
+                      @RequestParam("locSize") String locSize,
+                      @RequestParam("locDe") String locDe){
+        if(locSP.equals("null") && locMS.equals("null") &&  locSize.equals("null") && locDe.equals("null")){
+            return "redirect:/chi-tiet-san-pham/hien-thi";
+        }
+        model.addAttribute("listSP", sanPhamRepository.findAll());
+        model.addAttribute("listMS", mauSacService.findAll());
+        model.addAttribute("listSize", sizeService.findAll());
+        model.addAttribute("listDe", deService.findAll());
+
+        List<ChiTietSanPham> list = chiTietSanPhamService.loc(locSP, locMS, locSize, locDe);
+        model.addAttribute("listCTSP", list);
+        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        return "layout";
     }
 
     @PostMapping("/modal-add-mau-sac")
@@ -171,7 +272,8 @@ public class ChiTietSanPhamController {
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listSize", sizeService.findAll());
             model.addAttribute("listDe", deService.findAll());
-            return "chi-tiet-san-pham/add";
+            model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
+            return "layout";
         }
         String maMS = "MS" + (mauSacService.findAll().size()+1);
         mauSac.setMa(maMS);
@@ -189,7 +291,8 @@ public class ChiTietSanPhamController {
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listSize", sizeService.findAll());
             model.addAttribute("listDe", deService.findAll());
-            return "chi-tiet-san-pham/add";
+            model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
+            return "layout";
         }
         String maSize  = "Size" + (sizeService.findAll().size()+1);
         size.setMa(maSize);
@@ -207,7 +310,8 @@ public class ChiTietSanPhamController {
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listSize", sizeService.findAll());
             model.addAttribute("listDe", deService.findAll());
-            return "chi-tiet-san-pham/add";
+            model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
+            return "layout";
         }
         String maDe = "De" + (deService.findAll().size()+1);
         de.setMa(maDe);
