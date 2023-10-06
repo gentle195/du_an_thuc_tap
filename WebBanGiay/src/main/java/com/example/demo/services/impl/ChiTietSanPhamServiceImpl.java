@@ -19,7 +19,12 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public Page<ChiTietSanPham> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return repository.getAll(pageable);
+    }
+
+    @Override
+    public Page<ChiTietSanPham> getAll1(Pageable pageable) {
+        return repository.getAll1(pageable);
     }
 
     @Override
@@ -28,13 +33,28 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> search(String search) {
+    public List<ChiTietSanPham> findAll0() {
+        return repository.findAll0();
+    }
+
+    @Override
+    public List<ChiTietSanPham> search0(String search) {
         return repository.search(search);
+    }
+
+    @Override
+    public List<ChiTietSanPham> search1(String search) {
+        return repository.search1(search);
     }
 
     @Override
     public List<ChiTietSanPham> loc(String locSP, String locMS, String locSize, String locDe) {
         return repository.loc(locSP, locMS, locSize, locDe);
+    }
+
+    @Override
+    public List<ChiTietSanPham> loc1(String locSP, String locMS, String locSize, String locDe) {
+        return repository.loc1(locSP, locMS, locSize, locDe);
     }
 
     @Override
@@ -60,14 +80,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if(id != null){
-            ChiTietSanPham ctsp = repository.findById(id).orElse(null);
-            if(ctsp != null){
-                repository.delete(ctsp);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        repository.updateTT();
     }
+
 }

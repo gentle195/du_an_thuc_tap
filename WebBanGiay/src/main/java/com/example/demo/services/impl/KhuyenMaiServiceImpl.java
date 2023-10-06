@@ -15,11 +15,16 @@ import java.util.UUID;
 @Service
 public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     @Autowired
-    private KhuyenMaiRepository repository;
+    KhuyenMaiRepository repository;
 
     @Override
     public Page<KhuyenMai> getAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return repository.getAll(pageable);
+    }
+
+    @Override
+    public Page<KhuyenMai> getAll1(Pageable pageable) {
+        return repository.getAll1(pageable);
     }
 
     @Override
@@ -28,8 +33,8 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     }
 
     @Override
-    public List<KhuyenMai> search(String search) {
-        return repository.search(search);
+    public List<KhuyenMai> findAll0() {
+        return repository.findAll0();
     }
 
     @Override
@@ -38,31 +43,34 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     }
 
     @Override
-    public KhuyenMai add(KhuyenMai khuyenMai) {
-        return repository.save(khuyenMai);
+    public KhuyenMai add(KhuyenMai chip) {
+        return repository.save(chip);
     }
 
     @Override
-    public KhuyenMai update(UUID id, KhuyenMai khuyenMai) {
+    public KhuyenMai update(UUID id, KhuyenMai chip) {
         if (id != null) {
-            KhuyenMai km = repository.findById(id).orElse(null);
-            if (km != null) {
-                BeanUtils.copyProperties(khuyenMai, km);
-                repository.save(km);
+            KhuyenMai chipUpdate = repository.findById(id).orElse(null);
+            if (chipUpdate != null) {
+                BeanUtils.copyProperties(chip, chipUpdate);
+                repository.save(chipUpdate);
             }
         }
         return null;
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if (id != null) {
-            KhuyenMai km = repository.findById(id).orElse(null);
-            if (km != null) {
-                repository.delete(km);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        repository.updateTT();
+    }
+
+    @Override
+    public List<KhuyenMai> search0(String ten) {
+        return repository.search0(ten);
+    }
+
+    @Override
+    public List<KhuyenMai> search1(String ten) {
+        return repository.search1(ten);
     }
 }

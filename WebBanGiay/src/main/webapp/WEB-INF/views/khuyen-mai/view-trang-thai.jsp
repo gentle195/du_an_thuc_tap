@@ -21,15 +21,23 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" href="/khuyen-mai/hien-thi" role="tab" onclick="return myFunction4()">Thông tin khuyến mãi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/khuyen-mai/view-add" role="tab" onclick="return myFunction6()">Thêm khuyến mãi</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin chi tiết sản phẩm</a>
+               aria-controls="description" aria-selected="true">Khuyến mãi đã xoá</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab" onclick="return myFunction7()">Chi tiết sản phẩm đã xóa</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab" onclick="return myFunction6()">Thêm chi tiết sản phẩm</a>
-        </li>
+        <a href="/khuyen-mai/update-all" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
+           tabindex="-1"
+           role="button"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+            <i class="ti-reload btn-icon-prepend"></i>
+            Status All
+        </a>
     </ul>
 </div>
 <div>
@@ -39,104 +47,70 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title" style="float: left">Danh sách chi tiết sản phẩm</h4>
+                        <h4 class="card-title" style="float: left">Danh sách khuyến mãi</h4>
                         <%--            Tìm kiếm               --%>
-                        <table class="table container">
-                            <tbody>
-                            <tr>
-                                <form action="/chi-tiet-san-pham/search" method="post">
-                                    <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
-                                        <button type="submit">Tìm kiếm</button>
-                                    </td>
-                                </form>
-                                <form action="/chi-tiet-san-pham/loc" method="post">
-                                    <td colspan="2" style="text-align: center">
-                                        Lọc:
-                                        <select name="locSP">
-                                            <option value="null">Sản phẩm</option>
-                                            <c:forEach items="${listSP}" var="sp">
-                                                <option value="${sp.ten}">${sp.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locMS">
-                                            <option value="null">Màu sắc</option>
-                                            <c:forEach items="${listMS}" var="ms">
-                                                <option value="${ms.ten}">${ms.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locSize">
-                                            <option value="null">Size</option>
-                                            <c:forEach items="${listSize}" var="size">
-                                                <option value="${size.size}">${size.size}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locDe">
-                                            <option value="null">Loại đế</option>
-                                            <c:forEach items="${listDe}" var="de">
-                                                <option value="${de.loaiDe}">${de.loaiDe}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <button type="submit">Lọc</button>
-                                    </td>
-                                </form>
-                                <td colspan="2" style="text-align: center">
-                                    <button class="btn btn-info">
-                                        <a style="color: white;text-decoration: none" href="/chi-tiet-san-pham/view-add">Thêm mới</a>
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
+                        <form action="/khuyen-mai/search-1" method="post">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
+                                <div class="col-4">
+                                    <div class="input-group" style="width: 100%; float: left">
+                                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                                               aria-label="Bạn tìm gì..." name="search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sm btn-primary" type="submit"
+                                                    onclick="return myFunction5()">Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <%--           kết thúc tìm kiếm         --%>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tr>
                                     <th>STT</th>
-                                    <th>Ảnh</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Màu sắc</th>
-                                    <th>Kích cỡ</th>
-                                    <th>Loại đế</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán</th>
-                                    <th>Năm bảo hành</th>
+                                    <th>Mã</th>
+                                    <th>Tên CT</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                    <th>Mức</th>
+                                    <th>Loại</th>
+                                    <th>Hình thức</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày cập nhật</th>
                                     <th>Tình trạng</th>
                                     <th colspan="2">Chức năng</th>
                                 </tr>
-                                <c:forEach items="${listCTSP}" var="ctsp" varStatus="stt">
+                                <c:forEach items="${listKM}" var="km" varStatus="stt">
                                     <tr>
                                         <td>${stt.index+1}</td>
-                                        <td>${ctsp.urlAnh}</td>
-                                        <td>${ctsp.sanPham.ten}</td>
-                                        <td>${ctsp.mauSac.ten}</td>
-                                        <td>${ctsp.sizeGiay.size}</td>
-                                        <td>${ctsp.de.loaiDe}</td>
-                                        <td>${ctsp.soLuongTon}</td>
-                                        <td>${ctsp.giaNhap}</td>
-                                        <td>${ctsp.giaBan}</td>
-                                        <td>${ctsp.namBaoHanh}</td>
-                                        <td>${ctsp.ngayTao}</td>
-                                        <td>${ctsp.ngayCapNhat}</td>
+                                        <td>${km.ma}</td>
+                                        <td>${km.ten} </td>
+                                        <td>${km.ngayBatDau}</td>
+                                        <td>${km.ngayKetThuc}</td>
+                                        <td>${km.soTienGiam}</td>
+                                        <td>${km.loaiGiamGia}</td>
+                                        <td>${km.hinhThucGiamGia}</td>
+                                        <td>${km.ngayTao}</td>
+                                        <td>${km.ngayCapNhat}</td>
                                         <td>
-                                            <c:if test="${ctsp.tinhTrang==0}">Còn hàng</c:if>
-                                            <c:if test="${ctsp.tinhTrang==1}">Hết hàng</c:if>
+                                            <c:if test="${km.tinhTrang==0}">Còn chương trình</c:if>
+                                            <c:if test="${km.tinhTrang==1}">Hết chương trình</c:if>
                                         </td>
-
                                         <td colspan="2">
                                             <a class="btn btn-warning btn-icon-text"
-                                               href="/chi-tiet-san-pham/view-update/${ctsp.id}"
+                                               href="/khuyen-mai/view-update/${km.id}"
                                                onclick="return myFunction2()">
                                                 <i class="ti-file btn-icon-prepend"></i>
                                                 Update</a>
                                             <a class="btn btn-danger btn-icon-text"
-                                               href="/chi-tiet-san-pham/update-status/${ctsp.id}"
+                                               href="/khuyen-mai/update-status/${km.id}"
                                                onclick="return myFunction3()"><i class="ti-reload btn-icon-prepend"></i>
                                                 Status</a>
                                         </td>
+
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -148,16 +122,15 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=0">First</a></li>
-
+                            <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=0">First</a></li>
                             <c:forEach begin="1" end="${total}" varStatus="status">
                                 <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/hien-thi?num=${status.index - 1}"
+                                    <a href="${pageContext.request.contextPath}/khuyen-mai/hien-thi?num=${status.index -1}"
                                        class="page-link">${status.index}</a>
                                 </li>
                             </c:forEach>
-
-                            <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=${total-1}">Last</a></li>
+                            <li class="page-item"><a class="page-link"
+                                                     href="/khuyen-mai/hien-thi?num=${total-1}">Last</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -244,6 +217,8 @@
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
