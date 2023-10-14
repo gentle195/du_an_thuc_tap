@@ -21,7 +21,12 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
 
     @Override
     public Page<HangSanPham> getAll(Pageable pageable) {
-        return hangSanPhamRepository.findAll(pageable);
+        return hangSanPhamRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<HangSanPham> getAll1(Pageable pageable) {
+        return hangSanPhamRepository.getAll1(pageable);
     }
 
     @Override
@@ -30,9 +35,10 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     }
 
     @Override
-    public List<HangSanPham> search(String search) {
-        return hangSanPhamRepository.search(search);
+    public List<HangSanPham> findAll0() {
+        return null;
     }
+
 
     @Override
     public HangSanPham findById(UUID id) {
@@ -52,22 +58,25 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
                 BeanUtils.copyProperties(hangSanPham, hangSanPhamUpadte);
                 hangSanPhamRepository.save(hangSanPhamUpadte);
 
+            }
+
+
         }
-
-
-    }
         return null;
-}
+    }
 
     @Override
-    public Boolean delete(UUID id) {
-        if (id != null) {
-            HangSanPham hangSanPham = hangSanPhamRepository.findById(id).orElse(null);
-            if (hangSanPham != null) {
-                hangSanPhamRepository.delete(hangSanPham);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        hangSanPhamRepository.updateTT();
+    }
+
+    @Override
+    public List<HangSanPham> search0(String ten) {
+        return hangSanPhamRepository.search0(ten);
+    }
+
+    @Override
+    public List<HangSanPham> search1(String ten) {
+        return hangSanPhamRepository.search1(ten);
     }
 }
