@@ -16,9 +16,15 @@ import java.util.UUID;
 public class ChatLieuServiceImpl implements ChatLieuService {
     @Autowired
     ChatLieuRepository chatLieuRepository;
+
     @Override
     public Page<ChatLieu> getAll(Pageable pageable) {
-        return chatLieuRepository.findAll(pageable);
+        return chatLieuRepository.getAll(pageable);
+    }
+
+    @Override
+    public Page<ChatLieu> getAll1(Pageable pageable) {
+        return chatLieuRepository.getAll1(pageable);
     }
 
     @Override
@@ -27,9 +33,11 @@ public class ChatLieuServiceImpl implements ChatLieuService {
     }
 
     @Override
-    public List<ChatLieu> search(String search) {
-        return chatLieuRepository.search(search);
+    public List<ChatLieu> findAll0() {
+        return  chatLieuRepository.findAll0();
     }
+
+
 
     @Override
     public ChatLieu findById(UUID id) {
@@ -54,14 +62,17 @@ public class ChatLieuServiceImpl implements ChatLieuService {
     }
 
     @Override
-    public Boolean delete(UUID id) {
-        if(id != null){
-            ChatLieu chatLieu = chatLieuRepository.findById(id).orElse(null);
-            if(chatLieu != null){
-                chatLieuRepository.delete(chatLieu);
-                return true;
-            }
-        }
-        return false;
+    public void updateTT() {
+        chatLieuRepository.updateTT();
+    }
+
+    @Override
+    public List<ChatLieu> search0(String ten) {
+        return chatLieuRepository.search0(ten);
+    }
+
+    @Override
+    public List<ChatLieu> search1(String ten) {
+        return chatLieuRepository.search1(ten);
     }
 }

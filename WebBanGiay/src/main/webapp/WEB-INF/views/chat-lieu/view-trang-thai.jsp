@@ -21,16 +21,23 @@
 <div>
     <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" href="/chat-lieu/hien-thi" role="tab" onclick="return myFunction4()">Thông tin chát liêu </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/chat-lieu/view-add" role="tab" onclick="return myFunction6()">Thêm chất liệu </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-               aria-controls="description" aria-selected="true">Thông tin chất liệu</a>
+               aria-controls="description" aria-selected="true">chất liệu đã xoá</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chat-lieu/hien-thi-delete" role="tab" onclick="return myFunction7()">chất liệu
-                đã xoá</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/chat-lieu/view-add" role="tab"  onclick="return myFunction6()">Thêm chất liệu</a>
-        </li>
+        <a href="/chat-lieu/update-all" class="btn btn-outline-danger btn-icon-text"
+           style="float: right; margin-left: 720px"
+           tabindex="-1"
+           role="button"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+            <i class="ti-reload btn-icon-prepend"></i>
+            Status All
+        </a>
     </ul>
 </div>
 <div>
@@ -42,7 +49,7 @@
                     <div class="card-body">
                         <h4 class="card-title" style="float: left">Danh sách chất liệu</h4>
                         <%--            Tìm kiếm               --%>
-                        <form action="/chat-lieu/search-0" method="post">
+                        <form action="/chat-lieu/search-1" method="post">
                             <div class="row">
                                 <div class="col-8">
                                     <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
@@ -85,11 +92,7 @@
 
 
                                         <td colspan="2">
-                                            <a class="btn btn-warning btn-icon-text"
-                                               href="/chat-lieu/view-update/${chatLieu.id}"
-                                               onclick="return myFunction2()">
-                                                <i class="ti-file btn-icon-prepend"></i>
-                                                Update</a>
+
                                             <a class="btn btn-danger btn-icon-text"
                                                href="/chat-lieu/update-status/${chatLieu.id}"
                                                onclick="return myFunction3()"><i class="ti-reload btn-icon-prepend"></i>
