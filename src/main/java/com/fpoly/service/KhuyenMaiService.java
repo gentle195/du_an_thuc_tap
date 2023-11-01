@@ -12,11 +12,18 @@ public interface KhuyenMaiService {
                                         Integer endStr,
                                         String dateFrom,
                                         String dateTo);
+
     KhuyenMaiDTO createVoucher(KhuyenMaiDTO khuyenMaiDTO);
+
     KhuyenMaiDTO editVoucher(Long id, KhuyenMaiDTO khuyenMaiDTO);
+
     KhuyenMaiDTO getVoucher(Long id);
+
     boolean deleteVoucher(Long id);
+
     boolean toggleDisableVoucher(Long id);
-	KhuyenMaiDTO timKhuyenMaiTheoTenKhuyenMai(String maGiamGia);
+
+    KhuyenMaiDTO timKhuyenMaiTheoTenKhuyenMai(String maGiamGia);
+
     boolean checkExistVoucher(KhuyenMaiDTO khuyenMaiDTO);
 }
