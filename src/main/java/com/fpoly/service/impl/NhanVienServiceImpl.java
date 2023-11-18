@@ -84,7 +84,7 @@ public class NhanVienServiceImpl implements NhanVienService {
         nguoiDung.setAnhNhanVien(anhNhanVien);
         nguoiDung.setMatKhau(passwordEncoder.encode(new String(password)));
 
-        mailService.sendMail("duongnvph17448@fpt.edu.vn",
+        mailService.sendMail("vuongnqph25621@fpt.edu.vn",
                 nguoiDung.getEmail(),
                 "Bạn đã đăng ký tài khoản thành công !",
                 "Họ tên  : " + nguoiDung.getTenNguoiDung() + "\n" +

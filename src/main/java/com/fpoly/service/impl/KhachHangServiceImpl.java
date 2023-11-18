@@ -216,7 +216,7 @@ public class KhachHangServiceImpl implements KhachHangService {
                 dto.setSoLanMua(0);
                 dto.setMatKhau(new String(password));
                 khachHangEntity = khachHangConvertor.toEntity(dto);
-                mailService.sendMail("duongnvph17448@fpt.edu.vn",
+                mailService.sendMail("vuongnqph25621@fpt.edu.vn",
                         dto.getEmail(),
                         "Bạn đã đăng ký tài khoản thành công !",
                         "Họ tên  : " + dto.getHoTen() + "\n" +
@@ -407,7 +407,7 @@ public class KhachHangServiceImpl implements KhachHangService {
         khachHangDTO.setTrangThai(1);
         khachHangDTO.setMatKhau(new String(password));
         khachHang = khachHangConvertor.toEntity(khachHangDTO);
-        mailService.sendMail("duongnvph17448@fpt.edu.vn",
+        mailService.sendMail("vuongnqph25621@fpt.edu.vn",
                 khachHangDTO.getEmail(),
                 "Bạn đã đăng ký tài khoản thành công !",
                 "Họ tên  : " + khachHangDTO.getHoTen() + "\n" +
@@ -434,7 +434,7 @@ public class KhachHangServiceImpl implements KhachHangService {
         KhachHang entity = khachHangRepository.findByEmail(email);
         code = new String(RanDomUtil.randomNumber());
         if (entity.getEmail() != null) {
-            mailService.sendMail("duongnvph17448@fpt.edu.vn",
+            mailService.sendMail("vuongnqph25621@fpt.edu.vn",
                     entity.getEmail(),
                     "Your code reset password",
                     "Code : " + code);

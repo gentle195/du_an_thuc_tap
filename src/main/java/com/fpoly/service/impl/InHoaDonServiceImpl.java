@@ -205,7 +205,10 @@ public class InHoaDonServiceImpl implements InHoaDonService {
             byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
 
             // Lưu file PDF vào thư mục dự án
-            String filePath = "D:\\DATN\\Clothes_ud15\\hoaDonDaIn\\hoa_don_" + hoaDonId + ".pdf";
+            String projectRootPath = System.getProperty("user.dir");
+
+            // Tạo đường dẫn động đến thư mục lưu pdf
+            String filePath = projectRootPath + "/hoaDonDatt/hoa_don_" + hoaDonId + ".pdf";
             try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
                 fileOutputStream.write(pdfBytes);
             } catch (IOException e) {
@@ -400,7 +403,10 @@ public class InHoaDonServiceImpl implements InHoaDonService {
             byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
 
             // Lưu file PDF vào thư mục dự án
-            String filePath = "D:\\DATN\\Clothes_ud15\\hoaDonDaIn\\hoa_don_" + hoaDonId + ".pdf";
+            String projectRootPath = System.getProperty("user.dir");
+
+            // Tạo đường dẫn động đến thư mục lưu pdf
+            String filePath = projectRootPath + "/hoaDonDatt/hoa_don_" + hoaDonId + ".pdf";
             try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
                 fileOutputStream.write(pdfBytes);
             } catch (IOException e) {
@@ -593,7 +599,10 @@ public class InHoaDonServiceImpl implements InHoaDonService {
             byte[] pdfBytes = createPdfFromHtml(htmlContentBuilder);
 
             // Lưu file PDF vào thư mục dự án
-            String filePath = "D:\\DATN\\Clothes_ud15\\hoaDonDaIn\\hoa_don_" + hoaDonId + ".pdf";
+            String projectRootPath = System.getProperty("user.dir");
+
+            // Tạo đường dẫn động đến thư mục lưu pdf
+            String filePath = projectRootPath + "/hoaDonDatt/hoa_don_" + hoaDonId + ".pdf";
             try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
                 fileOutputStream.write(pdfBytes);
             } catch (IOException e) {
